@@ -23,7 +23,7 @@
       height: 100vh;
       color: white;
       overflow: hidden;
-      position: relative; /* Added for positioning the audio toggle */
+      position: relative;
     }
 
     .overlay {
@@ -146,8 +146,8 @@
     }
 
     .audio-toggle img {
-      width: 20px; /* Adjust the size of the image */
-      height: 20px; /* Adjust the size of the image */
+      width: 20px;
+      height: 20px;
     }
   </style>
 </head>
@@ -170,7 +170,7 @@
       </div>
       <div class="form-group">
         <label for="teacher">Teacher's Name:</label>
-        <input type="text" id="teacher" name="teacher" placeholder="Enter teacher's name (optional)">
+        <input type="text" id="teacher" name="teacher" placeholder="Nabila Tabassum">
       </div>
       <div class="form-group">
         <label for="classwork">Classwork:</label>
@@ -188,7 +188,6 @@
     </form>
   </div>
 
-  <!-- Snowfall Effect -->
   <script>
     function createSnowflake() {
       const snowflake = document.createElement('div');
@@ -207,24 +206,33 @@
     function redirectToAPI(event) {
       event.preventDefault();
       const url = new URL('https://diary-r2c1.onrender.com/test');
-      ['date', 'class', 'subject', 'teacher', 'classwork', 'homework', 'remarks']
-        .forEach(field => url.searchParams.append(field, document.getElementById(field).value));
+
+      // Append each form field's value with updated field names for cw and hw
+      url.searchParams.append('date', document.getElementById('date').value);
+      url.searchParams.append('class', document.getElementById('class').value);
+      url.searchParams.append('subject', document.getElementById('subject').value);
+      url.searchParams.append('teacher', document.getElementById('teacher').value);
+      url.searchParams.append('cw', document.getElementById('classwork').value); // Changed to cw
+      url.searchParams.append('hw', document.getElementById('homework').value); // Changed to hw
+      url.searchParams.append('remarks', document.getElementById('remarks').value);
+
+      console.log(`Redirecting to: ${url.href}`); // Check final URL
       window.location.href = url;
     }
 
     // Audio control
     const audio = new Audio('onmyway.mp3');
-    audio.loop = true; // Set audio to loop
+    audio.loop = true;
     let isPlaying = false;
 
     function toggleAudio() {
       const toggleButton = document.getElementById('audioToggle');
       if (isPlaying) {
         audio.pause();
-        toggleButton.innerHTML = '<img src="play.png" alt="Play">'; // Play image
+        toggleButton.innerHTML = '<img src="play.png" alt="Play">';
       } else {
         audio.play();
-        toggleButton.innerHTML = '<img src="pause.png" alt="Pause">'; // Pause image
+        toggleButton.innerHTML = '<img src="pause.png" alt="Pause">';
       }
       isPlaying = !isPlaying;
     }
@@ -232,7 +240,7 @@
 
   <!-- Audio toggle button -->
   <button id="audioToggle" class="audio-toggle" onclick="toggleAudio()">
-    <img src="play.png" alt="Play"> <!-- Initial image -->
+    <img src="play.png" alt="Play">
   </button>
 </body>
 </html>
