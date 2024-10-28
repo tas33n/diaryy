@@ -68,7 +68,7 @@
       display: block;
     }
 
-    .form-group input {
+    .form-group select, .form-group input {
       width: 100%;
       padding: 10px;
       border: none;
@@ -79,8 +79,9 @@
       outline: none;
     }
 
-    .form-group input::placeholder {
-      color: rgba(255, 255, 255, 0.7);
+    .form-group select option {
+      background-color: #333;
+      color: white;
     }
 
     .submit-btn {
@@ -99,10 +100,6 @@
     .submit-btn:hover {
       background: linear-gradient(45deg, #2575fc, #6a11cb);
       transform: scale(1.05);
-    }
-
-    .form-group input:focus {
-      background: rgba(255, 255, 255, 0.3);
     }
 
     .snowflake {
@@ -129,7 +126,6 @@
       }
     }
 
-    /* Audio toggle button styles */
     .audio-toggle {
       position: absolute;
       top: 20px;
@@ -158,28 +154,32 @@
     <h2>Diary Form</h2>
     <form id="diaryForm" action="" method="get" onsubmit="redirectToAPI(event)">
       <div class="form-group">
-        <label for="date">Date:</label>
-        <input type="text" id="date" name="date" placeholder="04 - 05 - 2024 (Monday)" required>
-      </div>
-      <div class="form-group">
         <label for="class">Class:</label>
-        <input type="text" id="class" name="class" placeholder="Enter class" required>
+        <select id="class" name="class" required>
+          <option value="">Select class</option>
+          <option value="STD.I (Orchid & Camellia)">STD.I (Orchid & Camellia)</option>
+          <option value="STD.II (Daffodil & Daisy)">STD.II (Daffodil & Daisy)</option>
+          <option value="STD.III (Magnolia)">STD.III (Magnolia)</option>
+          <option value="STD.IV (Lavender)">STD.IV (Lavender)</option>
+          <option value="STD.V (Azalea)">STD.V (Azalea)</option>
+          <option value="STD.VI (Iris)">STD.VI (Iris)</option>
+        </select>
       </div>
       <div class="form-group">
         <label for="subject">Subject:</label>
-        <input type="text" id="subject" name="subject" placeholder="Enter subject" required>
-      </div>
-      <div class="form-group">
-        <label for="teacher">Teacher's Name:</label>
-        <input type="text" id="teacher" name="teacher" placeholder="Nabila Tabassum">
+        <select id="subject" name="subject" required>
+          <option value="">Select subject</option>
+          <option value="Music">Music</option>
+          <option value="Value Education">Value Education</option>
+        </select>
       </div>
       <div class="form-group">
         <label for="classwork">Classwork:</label>
-        <input type="text" id="classwork" name="classwork" placeholder="Enter classwork" required>
+        <input type="text" id="classwork" name="cw" placeholder="Enter classwork" required>
       </div>
       <div class="form-group">
         <label for="homework">Homework:</label>
-        <input type="text" id="homework" name="homework" placeholder="Enter homework">
+        <input type="text" id="homework" name="hw" placeholder="Enter homework">
       </div>
       <div class="form-group">
         <label for="remarks">Remarks:</label>
@@ -207,21 +207,16 @@
     function redirectToAPI(event) {
       event.preventDefault();
       const url = new URL('https://diary-r2c1.onrender.com/test');
-
-      // Append each form field's value with updated field names for cw and hw
-      url.searchParams.append('date', document.getElementById('date').value);
       url.searchParams.append('class', document.getElementById('class').value);
       url.searchParams.append('subject', document.getElementById('subject').value);
-      url.searchParams.append('teacher', document.getElementById('teacher').value);
-      url.searchParams.append('cw', document.getElementById('classwork').value); // Changed to cw
-      url.searchParams.append('hw', document.getElementById('homework').value); // Changed to hw
+      url.searchParams.append('cw', document.getElementById('classwork').value);
+      url.searchParams.append('hw', document.getElementById('homework').value);
       url.searchParams.append('remarks', document.getElementById('remarks').value);
 
-      console.log(`Redirecting to: ${url.href}`); // Check final URL
+      console.log(`Redirecting to: ${url.href}`);
       window.location.href = url;
     }
 
-    // Audio control
     const audio = new Audio('onmyway.mp3');
     audio.loop = true;
     let isPlaying = false;
@@ -239,7 +234,6 @@
     }
   </script>
 
-  <!-- Audio toggle button -->
   <button id="audioToggle" class="audio-toggle" onclick="toggleAudio()">
     <img src="play.png" alt="Play">
   </button>
