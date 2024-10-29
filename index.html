@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Diary Form</title>
+  <title>Diary & Downloader</title>
   <link rel="icon" href="nezuko.jpg" type="image/png">
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
@@ -18,12 +18,12 @@
       background: url('bgg.jpg') no-repeat center center fixed;
       background-size: cover;
       font-family: 'Poppins', sans-serif;
-      display: flex;
-      justify-content: center;
-      align-items: center;
       height: 100vh;
       color: white;
       overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       position: relative;
     }
 
@@ -37,24 +37,65 @@
       z-index: 1;
     }
 
+    .menu-icon {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      width: 40px;
+      height: 40px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      z-index: 2;
+    }
+
+    .menu-icon img {
+      width: 25px;
+    }
+
+    .dropdown {
+      display: none;
+      position: absolute;
+      top: 70px;
+      left: 20px;
+      background: rgba(0, 0, 0, 0.8);
+      border-radius: 10px;
+      overflow: hidden;
+      z-index: 2;
+    }
+
+    .dropdown button {
+      display: block;
+      padding: 10px 20px;
+      background: none;
+      color: white;
+      border: none;
+      cursor: pointer;
+      width: 100%;
+      text-align: left;
+    }
+
+    .dropdown button:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+
     .container {
       position: relative;
       z-index: 2;
       background: rgba(255, 255, 255, 0.1);
       padding: 20px;
       border-radius: 15px;
+      width: 350px;
       box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
       backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-      border: 1px solid rgba(255, 255, 255, 0.18);
-      width: 350px;
     }
 
     h2 {
       text-align: center;
-      font-size: 1.5em;
       margin-bottom: 20px;
-      color: white;
       font-weight: 600;
     }
 
@@ -63,24 +104,16 @@
     }
 
     .form-group label {
-      font-size: 0.9em;
-      margin-bottom: 5px;
       display: block;
+      margin-bottom: 5px;
     }
 
-    .form-group select, .form-group input {
+    .form-group input, .form-group select {
       width: 100%;
       padding: 10px;
       border: none;
       border-radius: 8px;
       background: rgba(255, 255, 255, 0.2);
-      color: white;
-      font-size: 0.9em;
-      outline: none;
-    }
-
-    .form-group select option {
-      background-color: #333;
       color: white;
     }
 
@@ -88,18 +121,15 @@
       width: 100%;
       padding: 12px;
       background: linear-gradient(45deg, #6a11cb, #2575fc);
-      color: white;
       border: none;
       border-radius: 8px;
       cursor: pointer;
-      font-size: 1em;
       font-weight: 600;
-      transition: transform 0.3s ease, background 0.3s ease;
+      transition: 0.3s;
     }
 
     .submit-btn:hover {
       background: linear-gradient(45deg, #2575fc, #6a11cb);
-      transform: scale(1.05);
     }
 
     .snowflake {
@@ -113,49 +143,46 @@
     }
 
     @keyframes fall {
-      0% {
-        transform: translateY(-10px) rotate(0deg);
-        opacity: 0;
-      }
-      50% {
-        opacity: 1;
-      }
-      100% {
-        transform: translateY(110vh) rotate(360deg);
-        opacity: 0;
-      }
+      0% { transform: translateY(-10px) rotate(0deg); opacity: 0; }
+      50% { opacity: 1; }
+      100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
     }
 
     .audio-toggle {
       position: absolute;
       top: 20px;
       right: 20px;
-      background: rgba(255, 255, 255, 0.1);
-      border: none;
-      border-radius: 50%;
       width: 40px;
       height: 40px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
       cursor: pointer;
-      display: flex;
-      justify-content: center;
-      align-items: center;
       z-index: 2;
     }
 
     .audio-toggle img {
       width: 20px;
-      height: 20px;
     }
   </style>
 </head>
 <body>
   <div class="overlay"></div>
-  <div class="container">
+
+  <div class="menu-icon" onclick="toggleDropdown()">
+    <img src="menu.png" alt="Menu">
+  </div>
+
+  <div class="dropdown" id="dropdownMenu">
+    <button onclick="showSection('diary')">Diary</button>
+    <button onclick="showSection('downloader')">Downloader</button>
+  </div>
+
+  <div class="container" id="diarySection">
     <h2>Diary Form</h2>
-    <form id="diaryForm" action="" method="get" onsubmit="redirectToAPI(event)">
+    <form onsubmit="redirectToDiaryAPI(event)">
       <div class="form-group">
         <label for="class">Class:</label>
-        <select id="class" name="class" required>
+        <select id="class" required>
           <option value="">Select class</option>
           <option value="STD.I (Orchid & Camellia)">STD.I (Orchid & Camellia)</option>
           <option value="STD.II (Daffodil & Daisy)">STD.II (Daffodil & Daisy)</option>
@@ -167,29 +194,72 @@
       </div>
       <div class="form-group">
         <label for="subject">Subject:</label>
-        <select id="subject" name="subject" required>
+        <select id="subject" required>
           <option value="">Select subject</option>
           <option value="Music">Music</option>
-          <option value="Value Education">Value Education</option>
+          <option value="Bangla">Bangla</option>
         </select>
       </div>
       <div class="form-group">
         <label for="classwork">Classwork:</label>
-        <input type="text" id="classwork" name="cw" placeholder="Enter classwork" required>
+        <input type="text" id="classwork" placeholder="Enter classwork" required>
       </div>
       <div class="form-group">
         <label for="homework">Homework:</label>
-        <input type="text" id="homework" name="hw" placeholder="Enter homework">
+        <input type="text" id="homework" placeholder="Enter homework">
       </div>
       <div class="form-group">
         <label for="remarks">Remarks:</label>
-        <input type="text" id="remarks" name="remarks" placeholder="Enter remarks">
+        <input type="text" id="remarks" placeholder="Enter remarks">
       </div>
       <button type="submit" class="submit-btn">Submit</button>
     </form>
   </div>
+    <div class="container" id="downloaderSection" style="display: none;">
+    <h2>Downloader Section</h2>
+    <form onsubmit="redirectToDownloaderAPI(event)">
+      <div class="form-group">
+        <label for="videoUrl">Video URL:</label>
+        <input type="url" id="videoUrl" placeholder="Enter YouTube video URL" required>
+      </div>
+      <button type="submit" class="submit-btn">Download MP3</button>
+    </form>
+  </div>
 
   <script>
+    function toggleDropdown() {
+      const dropdown = document.getElementById('dropdownMenu');
+      dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+    }
+
+    function showSection(section) {
+      document.getElementById('diarySection').style.display = section === 'diary' ? 'block' : 'none';
+      document.getElementById('downloaderSection').style.display = section === 'downloader' ? 'block' : 'none';
+      document.getElementById('dropdownMenu').style.display = 'none';
+    }
+
+    function redirectToDiaryAPI(event) {
+      event.preventDefault();
+      const url = new URL('https://diary-r2c1.onrender.com/test');
+      url.searchParams.append('class', document.getElementById('class').value);
+      url.searchParams.append('subject', document.getElementById('subject').value);
+      url.searchParams.append('cw', document.getElementById('classwork').value);
+      url.searchParams.append('hw', document.getElementById('homework').value);
+      url.searchParams.append('remarks', document.getElementById('remarks').value);
+
+      console.log(`Redirecting to: ${url.href}`);
+      window.location.href = url;
+    }
+
+    function redirectToDownloaderAPI(event) {
+      event.preventDefault();
+      const videoUrl = document.getElementById('videoUrl').value;
+      const apiUrl = `https://download-6boo.onrender.com/video?link=${encodeURIComponent(videoUrl)}`;
+
+      console.log(`Redirecting to: ${apiUrl}`);
+      window.location.href = apiUrl;  // Redirects to the API endpoint
+    }
+
     function createSnowflake() {
       const snowflake = document.createElement('div');
       snowflake.className = 'snowflake';
@@ -203,19 +273,6 @@
     }
 
     setInterval(createSnowflake, 300);
-
-    function redirectToAPI(event) {
-      event.preventDefault();
-      const url = new URL('https://diary-r2c1.onrender.com/test');
-      url.searchParams.append('class', document.getElementById('class').value);
-      url.searchParams.append('subject', document.getElementById('subject').value);
-      url.searchParams.append('cw', document.getElementById('classwork').value);
-      url.searchParams.append('hw', document.getElementById('homework').value);
-      url.searchParams.append('remarks', document.getElementById('remarks').value);
-
-      console.log(`Redirecting to: ${url.href}`);
-      window.location.href = url;
-    }
 
     const audio = new Audio('minefields1.mp3');
     audio.loop = true;
