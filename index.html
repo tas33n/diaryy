@@ -5,7 +5,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Diary & Downloader</title>
-  <link rel="icon" href="nezuko.jpg" type="image/png" />
+  <link rel="icon" href="assets/nezuko.jpg" type="image/png" />
   <style>
     @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap");
 
@@ -302,7 +302,7 @@
   <div class="overlay"></div>
 
   <div class="menu-icon" onclick="toggleDropdown()">
-    <img src="menu.png" alt="Menu" />
+    <img src="assets/menu.png" alt="Menu" />
   </div>
 
   <div class="dropdown" id="dropdownMenu">
@@ -506,10 +506,10 @@
       const toggleButton = document.getElementById("audioToggle");
       if (isPlaying) {
         audio.pause();
-        toggleButton.innerHTML = '<img src="play.png" alt="Play">';
+        toggleButton.innerHTML = '<img src="assets/play.png" alt="Play">';
       } else {
         audio.play();
-        toggleButton.innerHTML = '<img src="pause.png" alt="Pause">';
+        toggleButton.innerHTML = '<img src="assets/pause.png" alt="Pause">';
       }
       isPlaying = !isPlaying;
     }
@@ -525,7 +525,7 @@
 
       // Load the background image
       const bg = new Image();
-      bg.src = "bg2.png";
+      bg.src = "assets/bg2.png";
       await new Promise((resolve) => (bg.onload = resolve));
 
       canvas.width = bg.width;
@@ -574,7 +574,7 @@
   </script>
 
   <button id="audioToggle" class="audio-toggle" onclick="toggleAudio()">
-    <img src="play.png" alt="Play" />
+    <img src="assets/play.png" alt="Play" />
   </button>
   <img id="respon" style="display: none" alt="Response Image" />
 </body>

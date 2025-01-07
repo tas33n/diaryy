@@ -3,12 +3,12 @@
   "short_name": "Diary",
   "icons": [
     {
-      "src": "avatar.png",
+      "src": "assets/avatar.png",
       "sizes": "192x192",
       "type": "image/png"
     },
     {
-      "src": "avatar.png",
+      "src": "assets/avatar.png",
       "sizes": "512x512",
       "type": "image/png"
     }
