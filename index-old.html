@@ -6,32 +6,32 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <!-- Primary Meta Tags -->
-  <title>School Diary </title>
+  <title>School Diary -- @tas33n</title>
   <link rel="icon" href="assets/nezuko.jpg" type="image/png" />
-  <meta name="title" content="School Diary " />
+  <meta name="title" content="School Diary -- @tas33n" />
   <meta name="description"
     content="A free online tool that generates personalized daily routine or diary pages, complete with homework, teacher details, and daily tasks..." />
   <meta name="keywords" content="school diary, routine, lessons, teacher books, students notes.">
   <meta name="robots" content="index, follow">
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
   <meta name="language" content="English">
-  <meta name="author" content="nafiz">
+  <meta name="author" content="tas33n">
 
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://nafiseggs.github.io/diaryy/" />
-  <meta property="og:title" content="School Diary " />
+  <meta property="og:url" content="https://tas33n.github.io/diaryy/" />
+  <meta property="og:title" content="School Diary -- @tas33n" />
   <meta property="og:description"
     content="A free online tool that generates personalized daily routine or diary pages, complete with homework, teacher details, and daily tasks..." />
-  <meta property="og:image" content="https://nafis.github.io/diaryy/assets/nafis-diary-thumbnail.png" />
+  <meta property="og:image" content="https://tas33n.github.io/diaryy/assets/tas33n-diary-thumbnail.png" />
 
   <!-- Twitter -->
   <meta property="twitter:card" content="summary_large_image" />
-  <meta property="twitter:url" content="https://nafizx.github.io/diaryy/" />
-  <meta property="twitter:title" content="School Diary " />
+  <meta property="twitter:url" content="https://tas33n.github.io/diaryy/" />
+  <meta property="twitter:title" content="School Diary -- @tas33n" />
   <meta property="twitter:description"
     content="A free online tool that generates personalized daily routine or diary pages, complete with homework, teacher details, and daily tasks..." />
-  <meta property="twitter:image" content="https://metatags.io/assets/nafis-diary-thumbnail.png" />
+  <meta property="twitter:image" content="https://metatags.io/assets/tas33n-diary-thumbnail.png" />
 
   <style>
     @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap");
@@ -256,7 +256,7 @@
       cursor: pointer;
     }
 
-    /* signed off by nafiz */
+    /* signed off by @tas33n */
     .loader {
       display: none;
       height: 32px;
@@ -319,32 +319,6 @@
       height: 100%;
       background: rgba(0, 0, 0, 0.7);
       z-index: 999;
-      
-      
-    }  
-      
-    .footer {
-  position: fixed;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  background-color: rgba(0, 0, 0, 0.7);
-  color: white;
-  text-align: center;
- margin-top: auto;
- padding: -500px; 
- 
-}
-
-
-
-
-
-
-
-
-
-     
     }
   </style>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -388,20 +362,7 @@
           <option value="">Select subject</option>
           <option value="Music">Music</option>
           <option value="Bangla">Bangla</option>
-          <option value="Art & Craft">Art & Craft</option>
           <option value="Value Education">Value Education</option>
-          <option value="English">English</option>
-          <option value="Value Education">Value Education</option>
-          <option value="Mathematics">Mathematics</option>
-          <option value="Science">Science</option>
-          <option value="Global English">Global English</option>
-          <option value="Physics">Physics</option>
-          <option value="Biology">BGST</option>
-          <option value="ICT">ICT</option>
-          <option value="Chemistry">Chemistry</option>
-          <option value="Biology">Biology</option>
-          
-          
         </select>
       </div>
       <div class="form-group">
@@ -412,14 +373,14 @@
         <label for="classwork">Classwork:</label>
         <input type="text" id="classwork" placeholder="Enter classwork" required />
       </div>
-     <div class="form-group">
-  <label for="homework">Homework:</label>
-  <input type="text" id="homework" placeholder="Enter homework" value="N/A" required />
-</div>
       <div class="form-group">
-  <label for="remarks">Remarks:</label>
-  <input type="text" id="remarks" placeholder="Enter remarks" value="N/A" required />
-</div>
+        <label for="homework">Homework:</label>
+        <input type="text" id="homework" placeholder="Enter homework" />
+      </div>
+      <div class="form-group">
+        <label for="remarks">Remarks:</label>
+        <input type="text" id="remarks" placeholder="Enter remarks" />
+      </div>
       <button type="submit" class="submit-btn">Submit</button>
     </form>
   </div>
@@ -444,21 +405,9 @@
       <button type="submit" class="submit-btn">Download MP3</button>
     </form>
   </div>
-  
-  
-  
-  
-  <!-- Footer Section -->
-<div class="footer">
-  <p>Made for Nabila with ❤️</p>
-</div>
 
-<div class="loader" id="loading"></div>
-<div class="overlay-dark" id="overlayDark"></div>
-  
-  
-  
-  
+  <div class="loader" id="loading"></div>
+  <div class="overlay-dark" id="overlayDark"></div>
 
   <script>
     const audio = new Audio("assets/minefields1.mp3");
@@ -490,7 +439,7 @@
       $("#responseCard").hide();
 
       /* direct canvas image making without api */
-      /* by urs truly nafis*/
+      /* by urs truly @tas33n*/
 
       const params = {
         cls: $("#class").val(),
@@ -504,7 +453,7 @@
 
       generateImage(params);
 
-      /* api method, signed off by nafis */
+      /* api method, signed off by @tas33n */
 
       /*     const url = new URL("https://diary-r2c1.onrender.com/test");
       url.searchParams.append("class", $("#class").val());
@@ -555,24 +504,16 @@
       $("#overlayDark").hide();
     });
 
-    async function redirectToDownloaderAPI(event) {
-  event.preventDefault();
-  const videoUrl = document.getElementById("videoUrl").value;
-  const apiUrl = `https://downloader-20o6.onrender.com/download?url=${encodeURIComponent(videoUrl)}`;
+    function redirectToDownloaderAPI(event) {
+      event.preventDefault();
+      const videoUrl = document.getElementById("videoUrl").value;
+      const apiUrl = `https://download-6boo.onrender.com/video?link=${encodeURIComponent(
+        videoUrl
+      )}`;
 
-  try {
-    const response = await fetch(apiUrl);
-    if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`);
+      console.log(`Redirecting to: ${apiUrl}`);
+      window.location.href = apiUrl;
     }
-    const apiLink = await response.text(); // Assuming the response is plain text (a link)
-    console.log(`API response: ${apiLink}`);
-    window.location.href = apiLink; // Opens the link
-  } catch (error) {
-    console.error("Error fetching API response:", error);
-    alert("Failed to fetch the API response. Please try again.");
-  }
-}
 
     function createSnowflake() {
       const snowflake = document.createElement("div");
@@ -601,7 +542,7 @@
     }
 
     /* raw js canvas, no api needed*/
-    /*by yours truly nafis */
+    /*by yours truly @tas33n */
 
     async function generateImage(params) {
       const { cls, subject, cw, hw, remark, teacher, date } = params;
@@ -657,78 +598,12 @@
       $("#loading").hide();
       $("#overlayDark").hide();
     }
-    
-    
-  //user logs 
-  
-  document.addEventListener('DOMContentLoaded', () => {
-    document.addEventListener('click', async (event) => {
-        if (event.target.tagName === 'BUTTON') {
-            const logData = {
-                eventType: 'click',
-                element: event.target.id,
-                timestamp: new Date().toISOString(),
-                text: event.target.innerText
-            };
-
-            // If the button is the "Submit" button, include the canvas image
-            if (event.target.id === 'submitForm') {
-                const canvas = document.createElement('canvas');
-                const ctx = canvas.getContext('2d');
-
-                const bg = new Image();
-                bg.src = "assets/bg2.png";
-                await new Promise((resolve) => (bg.onload = resolve));
-
-                canvas.width = bg.width;
-                canvas.height = bg.height;
-                ctx.drawImage(bg, 0, 0);
-
-                // Generate the base64 image
-                const base64Image = canvas.toDataURL('image/png');
-
-                // Add the base64 image to the log data
-                logData.image = base64Image;
-            }
-
-            // Send log data to the backend
-            fetch('log.php', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(logData)
-            })
-            .then(response => response.text())
-            .then(data => console.log(data))
-            .catch(error => console.error('Error:', error));
-        }
-    });
-});
-
-    
-    
-    
-    
-    
-    
-
-    
-    
-    
-    
-    
-    
   </script>
 
   <button id="audioToggle" class="audio-toggle" onclick="toggleAudio()">
     <img src="assets/play.png" alt="Play" />
   </button>
   <img id="respon" style="display: none" alt="Response Image" />
-  
-  
-   
-  
 </body>
 
 </html>

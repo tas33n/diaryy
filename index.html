@@ -6,32 +6,32 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <!-- Primary Meta Tags -->
-  <title>School Diary -- @tas33n</title>
+  <title>School Diary </title>
   <link rel="icon" href="assets/nezuko.jpg" type="image/png" />
-  <meta name="title" content="School Diary -- @tas33n" />
+  <meta name="title" content="School Diary " />
   <meta name="description"
     content="A free online tool that generates personalized daily routine or diary pages, complete with homework, teacher details, and daily tasks..." />
   <meta name="keywords" content="school diary, routine, lessons, teacher books, students notes.">
   <meta name="robots" content="index, follow">
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
   <meta name="language" content="English">
-  <meta name="author" content="tas33n">
+  <meta name="author" content="nafiz">
 
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://tas33n.github.io/diaryy/" />
-  <meta property="og:title" content="School Diary -- @tas33n" />
+  <meta property="og:url" content="https://nafiseggs.github.io/diaryy/" />
+  <meta property="og:title" content="School Diary " />
   <meta property="og:description"
     content="A free online tool that generates personalized daily routine or diary pages, complete with homework, teacher details, and daily tasks..." />
-  <meta property="og:image" content="https://tas33n.github.io/diaryy/assets/tas33n-diary-thumbnail.png" />
+  <meta property="og:image" content="https://nafis.github.io/diaryy/assets/nafis-diary-thumbnail.png" />
 
   <!-- Twitter -->
   <meta property="twitter:card" content="summary_large_image" />
-  <meta property="twitter:url" content="https://tas33n.github.io/diaryy/" />
-  <meta property="twitter:title" content="School Diary -- @tas33n" />
+  <meta property="twitter:url" content="https://nafizx.github.io/diaryy/" />
+  <meta property="twitter:title" content="School Diary " />
   <meta property="twitter:description"
     content="A free online tool that generates personalized daily routine or diary pages, complete with homework, teacher details, and daily tasks..." />
-  <meta property="twitter:image" content="https://metatags.io/assets/tas33n-diary-thumbnail.png" />
+  <meta property="twitter:image" content="https://metatags.io/assets/nafis-diary-thumbnail.png" />
 
   <style>
     @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap");
@@ -46,13 +46,14 @@
       background: url("assets/bgg.jpg") no-repeat center center fixed;
       background-size: cover;
       font-family: "Poppins", sans-serif;
-      height: 100vh;
+      height: 140vh;
       color: white;
       overflow: hidden;
       display: flex;
       justify-content: center;
       align-items: center;
       position: relative;
+      overflow: scroll;
     }
 
     .overlay {
@@ -137,6 +138,7 @@
     }
 
     .form-group input,
+    .form-group textarea,
     .form-group select {
       width: 100%;
       padding: 10px;
@@ -256,7 +258,7 @@
       cursor: pointer;
     }
 
-    /* signed off by @tas33n */
+    /* signed off by nafiz */
     .loader {
       display: none;
       height: 32px;
@@ -319,6 +321,21 @@
       height: 100%;
       background: rgba(0, 0, 0, 0.7);
       z-index: 999;
+
+
+    }
+
+    .footer {
+      position: fixed;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      background-color: rgba(0, 0, 0, 0.7);
+      color: white;
+      text-align: center;
+      margin-top: auto;
+      padding: -500px;
+
     }
   </style>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -362,7 +379,19 @@
           <option value="">Select subject</option>
           <option value="Music">Music</option>
           <option value="Bangla">Bangla</option>
+          <option value="Art & Craft">Art & Craft</option>
           <option value="Value Education">Value Education</option>
+          <option value="English">English</option>
+          <option value="Value Education">Value Education</option>
+          <option value="Mathematics">Mathematics</option>
+          <option value="Science">Science</option>
+          <option value="Global English">Global English</option>
+          <option value="Physics">Physics</option>
+          <option value="Biology">BGST</option>
+          <option value="ICT">ICT</option>
+          <option value="Chemistry">Chemistry</option>
+          <option value="Biology">Biology</option>
+
         </select>
       </div>
       <div class="form-group">
@@ -371,15 +400,15 @@
       </div>
       <div class="form-group">
         <label for="classwork">Classwork:</label>
-        <input type="text" id="classwork" placeholder="Enter classwork" required />
+        <textarea id="classwork" placeholder="Enter classwork" required rows="3"></textarea>
       </div>
       <div class="form-group">
         <label for="homework">Homework:</label>
-        <input type="text" id="homework" placeholder="Enter homework" />
+        <textarea id="homework" placeholder="Enter homework" required rows="3"></textarea>
       </div>
       <div class="form-group">
         <label for="remarks">Remarks:</label>
-        <input type="text" id="remarks" placeholder="Enter remarks" />
+        <input type="text" id="remarks" placeholder="Enter remarks" value="N/A" required />
       </div>
       <button type="submit" class="submit-btn">Submit</button>
     </form>
@@ -404,6 +433,10 @@
       </div>
       <button type="submit" class="submit-btn">Download MP3</button>
     </form>
+  </div>
+  <!-- Footer Section -->
+  <div class="footer">
+    <p>Made for Nabila with ❤️</p>
   </div>
 
   <div class="loader" id="loading"></div>
@@ -439,7 +472,7 @@
       $("#responseCard").hide();
 
       /* direct canvas image making without api */
-      /* by urs truly @tas33n*/
+      /* by urs truly nafis*/
 
       const params = {
         cls: $("#class").val(),
@@ -451,9 +484,11 @@
         date: null,
       };
 
-      generateImage(params);
+      generateImage(params).then(() => {
+        sendLogData(params);
+      });
 
-      /* api method, signed off by @tas33n */
+      /* api method, signed off by nafis */
 
       /*     const url = new URL("https://diary-r2c1.onrender.com/test");
       url.searchParams.append("class", $("#class").val());
@@ -504,15 +539,23 @@
       $("#overlayDark").hide();
     });
 
-    function redirectToDownloaderAPI(event) {
+    async function redirectToDownloaderAPI(event) {
       event.preventDefault();
       const videoUrl = document.getElementById("videoUrl").value;
-      const apiUrl = `https://download-6boo.onrender.com/video?link=${encodeURIComponent(
-        videoUrl
-      )}`;
+      const apiUrl = `https://downloader-20o6.onrender.com/download?url=${encodeURIComponent(videoUrl)}`;
 
-      console.log(`Redirecting to: ${apiUrl}`);
-      window.location.href = apiUrl;
+      try {
+        const response = await fetch(apiUrl);
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        const apiLink = await response.text(); // Assuming the response is plain text (a link)
+        console.log(`API response: ${apiLink}`);
+        window.location.href = apiLink; // Opens the link
+      } catch (error) {
+        console.error("Error fetching API response:", error);
+        alert("Failed to fetch the API response. Please try again.");
+      }
     }
 
     function createSnowflake() {
@@ -542,7 +585,7 @@
     }
 
     /* raw js canvas, no api needed*/
-    /*by yours truly @tas33n */
+    /*by yours truly nafis */
 
     async function generateImage(params) {
       const { cls, subject, cw, hw, remark, teacher, date } = params;
@@ -552,7 +595,7 @@
 
       // Load the background image
       const bg = new Image();
-      bg.src = "assets/bg2.png";
+      bg.src = "assets/bg-v2.jpg";
       await new Promise((resolve) => (bg.onload = resolve));
 
       canvas.width = bg.width;
@@ -566,13 +609,32 @@
       ctx.fillStyle = "#000000";
       ctx.textAlign = "start";
 
+      // Function to wrap text
+      function wrapText(context, text, x, y, maxWidth, lineHeight) {
+        const words = text.split(' ');
+        let line = '';
+        for (let n = 0; n < words.length; n++) {
+          const testLine = line + words[n] + ' ';
+          const metrics = context.measureText(testLine);
+          const testWidth = metrics.width;
+          if (testWidth > maxWidth && n > 0) {
+            context.fillText(line, x, y);
+            line = words[n] + ' ';
+            y += lineHeight;
+          } else {
+            line = testLine;
+          }
+        }
+        context.fillText(line, x, y);
+      }
+
       // Draw text elements
-      ctx.fillText(cls, 375, 739);
-      ctx.fillText(subject, 425, 870);
-      ctx.fillText(teacher || "Nabila Tabassum", 695, 997);
-      ctx.fillText(cw, 181, 1220);
-      ctx.fillText(hw, 181, 1628);
-      ctx.fillText(remark, 181, 1860);
+      ctx.fillText(cls, 375, 762);
+      ctx.fillText(subject, 425, 892);
+      ctx.fillText(teacher || "Nabila Tabassum", 695, 1018);
+      wrapText(ctx, cw, 181, 1240, 2000, 70);
+      wrapText(ctx, hw, 181, 1668, 2000, 70);
+      wrapText(ctx, remark, 181, 2100, 2000, 70);
 
       // Handle date
       ctx.textAlign = "center";
@@ -589,7 +651,7 @@
         });
         dateText = `Date: ${day}.${month}.${year} (${dayName})`;
       }
-      ctx.fillText(dateText, bg.width - 687, 736);
+      ctx.fillText(dateText, bg.width - 687, 756);
 
       // sh0ow the image canvas to image
       const img = document.getElementById("responseImage");
@@ -598,12 +660,26 @@
       $("#loading").hide();
       $("#overlayDark").hide();
     }
+
+    function sendLogData(logData) {
+      fetch('log.php', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(logData)
+      })
+        .then(response => response.json())
+        .then(data => console.log('Log data sent successfully:', data))
+        .catch(error => console.error('Error sending log data:', error));
+    }
   </script>
 
   <button id="audioToggle" class="audio-toggle" onclick="toggleAudio()">
     <img src="assets/play.png" alt="Play" />
   </button>
   <img id="respon" style="display: none" alt="Response Image" />
+
 </body>
 
 </html>
